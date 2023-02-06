@@ -28,8 +28,6 @@ public class Rainbow extends Application {
         float radiusOutside = 500;
         float degree = 0.0001f;
 
-        g.draw(new Line2D.Double(-2000, 0, 2000, 0));
-
         for (float i = 0 ; i < Math.PI ; i +=degree) {
 
             g.setColor(Color.getHSBColor(i/(float)Math.PI, 1, 1 ));
