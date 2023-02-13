@@ -28,11 +28,51 @@ public class YingYang extends Application {
     }
 
 
-    public void draw(FXGraphics2D graphics)
+    public void draw(FXGraphics2D g)
     {
-        graphics.setTransform(new AffineTransform());
-        graphics.setBackground(Color.white);
-        graphics.clearRect(0, 0, (int) canvas.getWidth(), (int) canvas.getHeight());
+        g.setTransform(new AffineTransform());
+        g.translate(this.canvas.getWidth() / 2, this.canvas.getHeight() / 2);
+        g.scale(2, -2);
+        g.setBackground(Color.white);
+        g.clearRect(0, 0, (int) canvas.getWidth(), (int) canvas.getHeight());
+
+        Shape outsideCircle = new Ellipse2D.Double(-75, -75, 150, 150);
+
+        GeneralPath swirl1 = new GeneralPath();
+        swirl1.moveTo(0, 75);
+        swirl1.curveTo(55, 72, 55, 0, 0, 0);
+        swirl1.closePath();
+
+        GeneralPath swirl2 = new GeneralPath();
+        swirl2.moveTo(0, 0);
+        swirl2.curveTo(-55, 0, -55, -72, 0, -75);
+        swirl2.closePath();
+
+        GeneralPath halfCircle = new GeneralPath();
+        halfCircle.moveTo(0, 75);
+        halfCircle.curveTo(-100, 75, -100, -75, 0, -75);
+        halfCircle.closePath();
+
+        Shape blackDot = new Ellipse2D.Double(-6.25, 32.5, 12.5, 12.5);
+        Shape whiteDot = new Ellipse2D.Double(-6.25, -44, 12.5, 12.5);
+
+        Area a1 = new Area(outsideCircle);
+        Area a2 = new Area(swirl1);
+        Area a3 = new Area(swirl2);
+        Area a4 = new Area(halfCircle);
+
+        a1.subtract(a2);
+        a2.add(a4);
+        a1.subtract(a4);
+        a1.add(a3);
+
+        g.fill(blackDot);
+        g.fill(a1);
+        g.draw(outsideCircle);
+        g.setColor(Color.WHITE);
+        g.fill(whiteDot);
+
+
     }
 
 

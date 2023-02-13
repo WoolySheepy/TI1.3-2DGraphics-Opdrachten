@@ -1,3 +1,4 @@
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -153,14 +154,15 @@ public class Spirograph extends Application {
                 lastX = x;
                 lastY = y;
             }
-            this.animation.pause();
+            this.animation.stop();
         } else {
             this.animation = new Timeline(new KeyFrame(Duration.millis(0.1), event -> {
                 this.phi += resolution;
                 drawPart(g);
             }));
-            this.animation.setCycleCount(2147483647);
+            this.animation.setCycleCount(Animation.INDEFINITE);
             this.animation.play();
+
         }
     }
 
